@@ -1,0 +1,32 @@
+# Copyright Kani Contributors
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+
+name: 'Kani Rust Verifier'
+description: 'Run the Kani Rust Verifier on a Rust Crate'
+author: 'Kani Contributors'
+
+branding:
+  icon: 'cloud'
+  color: 'orange'
+
+inputs:
+  command:
+    description: 'Command to run.'
+    required: false
+    default: 'cargo-kani --workspace'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Kani
+      shell: bash
+      run: |
+        export KANI_VERSION="0.13.0"; \
+        cargo install --version $KANI_VERSION --locked kani-verifier; \
+        cargo-kani setup;
+
+    - name: Run Kani
+      shell: bash
+      run: | 
+        ${{ inputs.command }}
+
