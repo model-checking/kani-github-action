@@ -15,4 +15,4 @@ jobs:
       - name: Run Kani
         uses: ./ # Uses the action in the root directory
         with:
-          command: cd tests/cargo-kani/simple-lib && cargo-kani
+          working-directory: tests/cargo-kani/simple-lib

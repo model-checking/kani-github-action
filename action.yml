@@ -13,7 +13,15 @@ inputs:
   command:
     description: 'Command to run.'
     required: false
-    default: 'cargo-kani --workspace'
+    default: 'cargo-kani'
+  working-directory:
+    description: 'Directory to run kani on.'
+    required: false
+    default: '.'
+  args:
+    description: 'Arguments to pass to kani.'
+    required: false
+    default: ''
 
 runs:
   using: "composite"
@@ -21,12 +29,13 @@ runs:
     - name: Install Kani
       shell: bash
       run: |
-        export KANI_VERSION="0.13.0"; \
-        cargo install --version $KANI_VERSION --locked kani-verifier; \
+        export KANI_VERSION="0.13.0";
+        cargo install --version $KANI_VERSION --locked kani-verifier;
         cargo-kani setup;
 
     - name: Run Kani
       shell: bash
       run: | 
-        ${{ inputs.command }}
+        cd ${{ inputs.working-directory }};
+        ${{ inputs.command }} ${{ inputs.args }}
 
