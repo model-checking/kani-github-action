@@ -26,6 +26,13 @@ inputs:
 runs:
   using: "composite"
   steps:
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1.0.7
+        id: toolchain
+        with:
+          toolchain: stable
+          override: true
+
     - name: Install Kani
       shell: bash
       run: |
