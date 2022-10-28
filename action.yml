@@ -29,7 +29,7 @@ runs:
     - name: Install Rust
       uses: actions-rs/toolchain@v1.0.7
       with:
-        toolchain: stable
+        toolchain: nightly-2022-10-25
         override: true
 
     - name: Install Kani
