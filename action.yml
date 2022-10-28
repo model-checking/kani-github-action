@@ -13,7 +13,15 @@ inputs:
   command:
     description: 'Command to run.'
     required: false
-    default: 'cargo-kani --workspace'
+    default: 'cargo-kani'
+  working-directory:
+    description: 'Directory to run kani on.'
+    required: false
+    default: '.'
+  args:
+    description: 'Arguments to pass to kani.  Default: --workspace'
+    required: false
+    default: '--workspace'
 
 runs:
   using: "composite"
@@ -28,5 +36,6 @@ runs:
     - name: Run Kani
       shell: bash
       run: | 
-        ${{ inputs.command }}
+        cd ${{ inputs.working-directory }}; \
+        ${{ inputs.command }} ${{ inputs.args }}
 
