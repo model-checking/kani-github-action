@@ -47,3 +47,4 @@ runs:
       run: |
         cd ${{ inputs.working-directory }};
         ${{ inputs.command }} ${{ inputs.args }}
+
