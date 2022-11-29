@@ -32,7 +32,7 @@ runs:
         # From https://github.com/model-checking/kani/blob/kani-0.16.0/rust-toolchain.toml
         # Should be updated every time we update the version to keep in sync.
         # This should be automated https://github.com/model-checking/kani-github-action/issues/9
-        toolchain: nightly-2022-11-06
+        toolchain: nightly-2022-11-20
         override: true
 
     - name: Install Kani
