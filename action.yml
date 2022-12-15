@@ -42,6 +42,13 @@ runs:
         cargo install --version $KANI_VERSION --locked kani-verifier;
         cargo-kani setup;
 
+    - name: Install PropProof
+      shell: bash
+      run: |
+        git clone https://github.com/model-checking/kani --branch features/proptest  $HOME/propproof
+        mkdir $HOME/.cargo
+        echo "paths = [\"$HOME/propproof\"]" > $HOME/.cargo/config.toml
+
     - name: Run Kani
       shell: bash
       run: |
