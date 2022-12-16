@@ -7,14 +7,16 @@
 mod test {
     use proptest::prelude::*;
     proptest! {
-        fn works_fine(even_num in any::<i32>().prop_map(|x| x * 2)) {
+        /// Works fine. Shift has no overflow check.
+        fn works_fine(even_num in any::<u32>().prop_map(|x| x << 1)) {
             prop_assert_eq!(even_num % 2, 0, "even number");
         }
     }
 
     proptest! {
+        // Overflow by check in x * 2
         fn fails(even_num in any::<i32>().prop_map(|x| x * 2)) {
-            prop_assert!(even_num * 2 > i32::MIN, "overflow");
+            prop_assert_eq!(even_num % 2, 0, "even number");
         }
     }
 }
