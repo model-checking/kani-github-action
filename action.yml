@@ -48,7 +48,6 @@ runs:
         export PROPPROOF_PATH=$HOME/propproof
         git clone https://github.com/model-checking/kani --branch features/proptest  $PROPPROOF_PATH
         (cd $PROPPROOF_PATH; git checkout --recurse-submodules)
-        mkdir $HOME/.cargo
         echo "paths = [\"$PROPPROOF_PATH\"]" > $HOME/.cargo/config.toml
 
     - name: Run Kani
