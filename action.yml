@@ -46,7 +46,7 @@ runs:
       shell: bash
       run: |
         export PROPPROOF_PATH=$HOME/propproof
-        git clone https://github.com/model-checking/kani --branch features/proptest $PROPPROOF_PATH
+        git clone https://github.com/model-checking/kani --branch features/proptest $PROPPROOF_PATH || ls $PROPPROOF_PATH
         echo "paths = [\"$PROPPROOF_PATH\"]" > $HOME/.cargo/config.toml
 
     - name: Install PropProof1
