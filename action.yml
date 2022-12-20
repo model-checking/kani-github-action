@@ -50,6 +50,7 @@ runs:
         --branch features/proptest $PROPPROOF_PATH || true
         git -C $PROPPROOF_PATH submodule update --init --recursive
         echo "paths = [\"$PROPPROOF_PATH\"]" > $HOME/.cargo/config.toml
+      # || true is used to handle cases where the propproof folder is cached.
 
     - name: Run Kani
       shell: bash
