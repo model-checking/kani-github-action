@@ -13,10 +13,14 @@ mod test {
         }
     }
 
-    proptest! {
-        // Overflow by check in x * 2
-        fn fails(even_num in any::<i32>().prop_map(|x| x * 2)) {
-            prop_assert_eq!(even_num % 2, 0, "even number");
+    #[cfg(not(kani))]
+    mod expected {
+        proptest! {
+            /// Overflow by check in x * 2. TODO: Need to implement
+            /// expected fail tests. tracking issue #5
+            fn fails(even_num in any::<i32>().prop_map(|x| x * 2)) {
+                prop_assert_eq!(even_num % 2, 0, "even number");
+            }
         }
     }
 }
