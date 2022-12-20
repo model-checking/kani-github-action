@@ -46,7 +46,6 @@ runs:
       shell: bash
       run: |
         export PROPPROOF_PATH=$HOME/propproof
-        ls $PROPPROOF_PATH
         git clone https://github.com/model-checking/kani --branch features/proptest $PROPPROOF_PATH
         echo "paths = [\"$PROPPROOF_PATH\"]" > $HOME/.cargo/config.toml
 
