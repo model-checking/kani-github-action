@@ -22,6 +22,10 @@ inputs:
     description: 'Arguments to pass to kani.'
     required: false
     default: ''
+  enable-propproof:
+    description: 'Experimental: Allow Kani to verify proptest harnesses using the propproof feature'
+    required: false
+    default: false
 
 runs:
   using: "composite"
@@ -43,6 +47,7 @@ runs:
         cargo-kani setup;
 
     - name: Install PropProof
+      if: ${{ inputs.enable-propproof }}
       shell: bash
       run: |
         export PROPPROOF_PATH=$HOME/propproof

@@ -21,3 +21,4 @@ jobs:
         with:
           working-directory: tests/cargo-kani/proptest-lib
           args: --tests
+          enable-propproof: true
