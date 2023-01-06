@@ -23,7 +23,7 @@ inputs:
     required: false
     default: ''
   enable-propproof:
-    description: 'Experimental: Allow Kani to verify proptest harnesses using the propproof feature'
+    description: 'Experimental: Allow Kani to verify proptest harnesses using the PropProof feature'
     required: false
     default: false
 
