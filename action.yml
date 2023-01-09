@@ -22,6 +22,10 @@ inputs:
     description: 'Arguments to pass to kani.'
     required: false
     default: ''
+  enable-propproof:
+    description: 'Experimental: Allow Kani to verify proptest harnesses using the PropProof feature'
+    required: false
+    default: false
 
 runs:
   using: "composite"
@@ -41,6 +45,17 @@ runs:
         export KANI_VERSION="0.18.0";
         cargo install --version $KANI_VERSION --locked kani-verifier;
         cargo-kani setup;
+
+    - name: Install PropProof
+      if: ${{ inputs.enable-propproof }}
+      shell: bash
+      run: |
+        export PROPPROOF_PATH=$HOME/propproof
+        git clone https://github.com/model-checking/kani \
+        --branch features/proptest $PROPPROOF_PATH || true
+        git -C $PROPPROOF_PATH submodule update --init --recursive
+        echo "paths = [\"$PROPPROOF_PATH\"]" > $HOME/.cargo/config.toml
+      # || true is used to handle cases where the propproof folder is cached.
 
     - name: Run Kani
       shell: bash

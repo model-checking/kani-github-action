@@ -16,3 +16,9 @@ jobs:
         uses: ./ # Uses the action in the root directory
         with:
           working-directory: tests/cargo-kani/simple-lib
+      - name: Test ProfProof within Kani Action
+        uses: ./
+        with:
+          working-directory: tests/cargo-kani/proptest-lib
+          args: --tests
+          enable-propproof: true
