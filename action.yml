@@ -59,7 +59,7 @@ runs:
       if: ${{ inputs.enable-propproof }}
       shell: bash
       run: |
-        echo "paths = [\"${{ GITHUB_WORKSPACE }}/propproof\"]" > $HOME/.cargo/config.toml
+        echo "paths = [\"$GITHUB_WORKSPACE/propproof\"]" > $HOME/.cargo/config.toml
 
     - name: Run Kani
       shell: bash
