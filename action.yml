@@ -54,6 +54,9 @@ runs:
         ref: features/proptest
         path: propproof
         submodules: true
+
+    - name: Add PropProof to config
+      if: ${{ inputs.enable-propproof }}
       shell: bash
       run: |
         echo "paths = [\"${{ GITHUB_WORKSPACE }}/propproof\"]" > $HOME/.cargo/config.toml
