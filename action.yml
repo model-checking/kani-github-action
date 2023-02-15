@@ -47,7 +47,7 @@ runs:
         cargo-kani setup;
 
     - name: Install PropProof
-      if: ${{ inputs.enable-propproof }}
+      if: ${{ inputs.enable-propproof == 'true' }}
       uses: actions/checkout@v3
       with:
         repository: model-checking/kani
@@ -56,7 +56,7 @@ runs:
         submodules: true
 
     - name: Add PropProof to config
-      if: ${{ inputs.enable-propproof }}
+      if: ${{ inputs.enable-propproof == 'true' }}
       shell: bash
       run: |
         echo "paths = [\"$GITHUB_WORKSPACE/propproof\"]" > $HOME/.cargo/config.toml
