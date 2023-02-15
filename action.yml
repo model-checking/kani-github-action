@@ -47,15 +47,19 @@ runs:
         cargo-kani setup;
 
     - name: Install PropProof
-      if: ${{ inputs.enable-propproof }}
+      if: ${{ inputs.enable-propproof == 'true' }}
+      uses: actions/checkout@v3
+      with:
+        repository: model-checking/kani
+        ref: features/proptest
+        path: propproof
+        submodules: true
+
+    - name: Add PropProof to config
+      if: ${{ inputs.enable-propproof == 'true' }}
       shell: bash
       run: |
-        export PROPPROOF_PATH=$HOME/propproof
-        git clone https://github.com/model-checking/kani \
-        --branch features/proptest $PROPPROOF_PATH || true
-        git -C $PROPPROOF_PATH submodule update --init --recursive
-        echo "paths = [\"$PROPPROOF_PATH\"]" > $HOME/.cargo/config.toml
-      # || true is used to handle cases where the propproof folder is cached.
+        echo "paths = [\"$GITHUB_WORKSPACE/propproof\"]" > $HOME/.cargo/config.toml
 
     - name: Run Kani
       shell: bash
