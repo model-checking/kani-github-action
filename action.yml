@@ -41,7 +41,7 @@ runs:
       shell: bash
       run: |
       ls .github/scripts
-      .github/scripts/install-kani.sh ${{ inputs.kani-version }}
+      ./github/scripts/install-kani.sh ${{ inputs.kani-version }}
 
     - name: Install PropProof
       if: ${{ inputs.enable-propproof == 'true' }}
