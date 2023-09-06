@@ -12,7 +12,7 @@ fi
 
 # Check exit status for error handling
 if [ $? -ne O ]; then
-    echo "Error installing $CLI_NAME. Please check if the provided version is correct"
+    echo "Error installing Kani. Please check if the provided version is correct"
     exit 1
 fi
 
