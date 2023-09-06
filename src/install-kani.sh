@@ -3,7 +3,6 @@
 # SPDX-License-Identifier: Apache-2.0 OR MIT
 
 # If version is latest, install directly from cargo
-echo $1;
 if [ "$1" == "latest" ]; then
     cargo install --locked kani-verifier;
 else
