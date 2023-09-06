@@ -39,9 +39,7 @@ runs:
 
     - name: Install Kani
       shell: bash
-      run: |
-        chmod +x ./install-kani.sh
-        ./install-kani.sh ${{ inputs.kani-version }}
+      run: ./github/scripts/install-kani.sh ${{ inputs.kani-version }}
 
     - name: Install PropProof
       if: ${{ inputs.enable-propproof == 'true' }}
