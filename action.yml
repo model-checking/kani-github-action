@@ -41,6 +41,7 @@ runs:
       shell: bash
       run: |
         cd "$GITHUB_WORKSPACE"
+        pwd
         ./install-kani.sh {{ inputs.kani-version }}
 
     - name: Install PropProof
