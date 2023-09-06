@@ -10,5 +10,11 @@ else
     cargo install --version $VERSION --locked kani-verifier;
 fi
 
-# setup kani in ci
+# Check exit status for error handling
+if [ $? -ne O ]; then
+    echo "Error installing $CLI_NAME. Please check if the provided version is correct"
+    exit 1
+fi
+
+# Setup kani in ci
 cargo-kani setup;
