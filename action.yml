@@ -10,6 +10,10 @@ branding:
   color: 'orange'
 
 inputs:
+  kani-version:
+    description: 'Kani Version number'
+    required: false
+    default: 'latest'
   command:
     description: 'Command to run.'
     required: false
@@ -34,11 +38,8 @@ runs:
       uses: dtolnay/rust-toolchain@stable
 
     - name: Install Kani
+      run: ${{ github.action_path }}/src/install-kani.sh ${{ inputs.kani-version }}
       shell: bash
-      run: |
-        export KANI_VERSION="0.35.0";
-        cargo install --version $KANI_VERSION --locked kani-verifier;
-        cargo-kani setup;
 
     - name: Install PropProof
       if: ${{ inputs.enable-propproof == 'true' }}
