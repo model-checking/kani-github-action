@@ -12,15 +12,15 @@ jobs:
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Run Kani
-        uses: ./ # Uses the action in the root directory
-        with:
-          working-directory: tests/cargo-kani/simple-lib
       - name: Run Kani with older version
         uses: ./ # Uses the action in the root directory
         with:
           working-directory: tests/cargo-kani/simple-lib
           kani-version: 0.33.0
+      - name: Run Kani
+        uses: ./ # Uses the action in the root directory
+        with:
+          working-directory: tests/cargo-kani/simple-lib
       - name: Test ProfProof within Kani Action
         uses: ./
         with:
