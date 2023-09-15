@@ -6,41 +6,43 @@ This repository provides a GitHub Action for running the [Kani Rust Verifier](ht
 
 The following parameters can be used to configure and customize the behavior of this GitHub Action:
 
-`kani-version` (optional)
+NOTE: All the fields provided are optional and have default behaviors when not specified.
+
+`kani-version`
 
 - **Description**: Specifies the Kani version number to use.
 - **Default**: 'latest'
 - **Usage**: You can provide a specific version of Kani to use. If omitted, the latest version will be installed and used.
 
-`command` (optional)
+`command`
 
 - **Description**: Specifies the command to run Kani.
 - **Default**: 'cargo-kani'
 - **Usage**: You can set a custom command to run Kani. For example, this allows you to use a different binary or script for Kani, if needed.
 
-`working-directory` (optional)
+`working-directory`
 
 - **Description**: Specifies the directory in which Kani should be run.
 - **Default**: '.'
 - **Usage**: Kani will be executed within this directory.
 
-`args` (optional)
+`args`
 
 - **Description**: Specifies additional arguments to pass to Kani.
 - **Default**: ''
 - **Usage**: You can provide any additional command-line arguments to Kani using this parameter. These arguments will be appended to the Kani command.
 
-`enable-propproof` (optional)
+`enable-propproof`
 
 - **Description**: Experimental feature that allows Kani to verify proptest harnesses using the PropProof feature.
 - **Default**: false
 - **Usage**: If set to `true`, Kani will enable the experimental PropProof feature for verifying proptest harnesses.
 
-### Kani-version default behavior
+## Kani-version default behavior
 
 Please note that since providing `kani-version` is optional, if the user doesn't provide the version, the action will install the latest version of `Kani` on `crates.io`.
 
-### Example usage in a workflow YAML file:
+## Example usage in a workflow YAML file:
 
 Here is an example of a workflow YAML file for the Kani Github Action
 
