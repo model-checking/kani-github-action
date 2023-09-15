@@ -26,7 +26,7 @@ jobs:
       - name: Debug previous step
         id: debug_step
         env:
-          S_OUTPUT: ${{ steps.set_error.outputs }}
+          S_OUTPUT: ${{ steps.set_error.outputs.test }}
         run: echo "The selected color is $S_OUTPUT"
 
       - name: Run Kani with older version
