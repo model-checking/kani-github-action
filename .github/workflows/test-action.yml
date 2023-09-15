@@ -17,7 +17,7 @@ jobs:
         id: set_error
         run: |
           output=$(./src/install-kani.sh "0.47.0")
-          echo "MY_VARIABLE=$output" >> $GITHUB_ENV
+          echo $output
         continue-on-error: true  # Continue to the next steps even if this job fails
 
       - name: Debug previous step
