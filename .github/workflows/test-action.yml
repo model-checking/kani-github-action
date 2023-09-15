@@ -12,6 +12,24 @@ jobs:
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Run Kani with invalid version
+        uses: ./ # Uses the action in the root directory
+        with:
+          working-directory: tests/cargo-kani/simple-lib
+          kani-version: 'l.33.1'
+        continue-on-error: true  # Continue to the next steps even if this job fails
+
+      - name: Check for Expected Error with invalid version
+        run: |
+          # Check if the error output contains the expected error substring
+          if echo "${{ steps.run-and-check.outputs.invalid_value }}" | grep -q "Could not install Kani."; then
+            echo "Error message contains the expected substring."
+          else
+            echo "Error message does not contain the expected substring."
+            exit 1  # Fail the job
+          fi
+
       - name: Run Kani with older version
         uses: ./ # Uses the action in the root directory
         with:
