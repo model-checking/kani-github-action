@@ -17,7 +17,7 @@ jobs:
         uses: ./ # Uses the action in the root directory
         with:
           working-directory: tests/cargo-kani/simple-lib
-          kani-version: 'l.33.1'
+          kani-version: '0.47.0'
         continue-on-error: true  # Continue to the next steps even if this job fails
 
       - name: Check for Expected Error with invalid version
