@@ -11,7 +11,9 @@ else
 fi
 
 # Check exit status for error handling
-if [ $? -ne O ]; then
+if [ $? -eq O ]; then
+    echo "Installed Kani $VERSION successfully"
+else
     echo "::error::Could not install Kani. Please check if the provided version is correct"
     exit 1
 fi
