@@ -21,6 +21,12 @@ jobs:
           kani-version: '0.47.0'
         continue-on-error: true  # Continue to the next steps even if this job fails
 
+      - name: Debug previous step
+        id: debug_step
+        env:
+          S_OUTPUT: ${{ steps.random-color-set_error.outputs }}
+        run: echo "The selected color is $S_OUTPUT"
+
       - name: Run Kani with older version
         uses: ./ # Uses the action in the root directory
         with:
