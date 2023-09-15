@@ -23,7 +23,7 @@ jobs:
       - name: Check for Expected Error with invalid version
         run: |
           # Check if the error output contains the expected error substring
-          if echo "${{ steps.run-and-check.outputs.invalid_value }}" | grep -q "Could not install Kani."; then
+          if echo "${{ steps.run-and-check.outputs.invalid_value }}" | grep -q "could not find `kani-verifier` in registry `crates-io` with version `=0.47.0`"; then
             echo "Error message contains the expected substring."
           else
             echo "Error message does not contain the expected substring."
