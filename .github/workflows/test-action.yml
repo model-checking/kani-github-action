@@ -23,7 +23,7 @@ jobs:
       - name: Check for Expected Error with invalid version
         run: |
           # Check if the error output contains the expected error substring
-          if echo "${{ steps.run-kani-with-invalid-version.outputs }}" | grep -q "Could not install Kani. Please check if the provided version is correct"; then
+          if echo "${{ steps.run-kani-with-invalid-version.outputs.stderr }}" | grep -q "Could not install Kani. Please check if the provided version is correct"; then
             echo "Error message contains the expected substring."
           else
             echo "Error message does not contain the expected substring."
