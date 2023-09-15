@@ -21,6 +21,11 @@ jobs:
           kani-version: '0.47.0'
         continue-on-error: true  # Continue to the next steps even if this job fails
 
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+
       - name: Check for Expected Error with invalid version
         id: check_error
         run: |
