@@ -17,19 +17,18 @@ jobs:
         id: set_error
         run: |
           output=$(./src/install-kani.sh "0.47.0")
-          echo "action_state=$output" >> $GITHUB_ENV
         continue-on-error: true  # Continue to the next steps even if this job fails
 
       - name: Check for Expected Error with invalid version
         id: check_error
         run: |
-          printf '%s\n' "$action_state"
+          echo $output
 
       - name: Run Kani with older version
         uses: ./ # Uses the action in the root directory
         with:
           working-directory: tests/cargo-kani/simple-lib
-          kani-version: 0.33.0
+          kani-version: '0.33.0'
       - name: Run Kani
         uses: ./ # Uses the action in the root directory
         with:
