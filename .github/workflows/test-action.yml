@@ -7,8 +7,6 @@ jobs:
   test-action:
     runs-on: ubuntu-latest
     name: Ensure that the Kani action continues to work
-    outputs:
-      output1: ${{steps.set_error.outputs.test}}
     steps:
       # To use this repository's private action,
       # you must check out the repository
@@ -17,17 +15,14 @@ jobs:
 
       - name: Run Kani with invalid version
         id: set_error
-        uses: ./
-        with:
-          working-directory: tests/cargo-kani/simple-lib
-          kani-version: '0.47.0'
+        runs: |
+          output=$(./src/install-kani.sh "0.47.0")
+          echo "MY_VARIABLE=$output" >> $GITHUB_ENV
         continue-on-error: true  # Continue to the next steps even if this job fails
 
       - name: Debug previous step
         id: debug_step
-        env:
-          S_OUTPUT: ${{ steps.set_error.outputs.test }}
-        run: echo "The selected color is $S_OUTPUT"
+        run: echo "The selected color is $MY_VARIABLE"
 
       - name: Run Kani with older version
         uses: ./ # Uses the action in the root directory
