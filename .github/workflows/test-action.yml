@@ -7,6 +7,8 @@ jobs:
   test-action:
     runs-on: ubuntu-latest
     name: Ensure that the Kani action continues to work
+    outputs:
+      output1: ${{steps.set_error.outputs.test}}
     steps:
       # To use this repository's private action,
       # you must check out the repository
@@ -24,7 +26,7 @@ jobs:
       - name: Debug previous step
         id: debug_step
         env:
-          S_OUTPUT: ${{ steps.random-color-set_error.outputs }}
+          S_OUTPUT: ${{ steps.set_error.outputs }}
         run: echo "The selected color is $S_OUTPUT"
 
       - name: Run Kani with older version
