@@ -20,16 +20,15 @@ jobs:
           echo "The output is: $output"
         continue-on-error: true  # Continue to the next steps even if this job fails
 
-    - name: Debug Step
-      run: |
-        # Check if error.log exists
-        if [ -f error.log ]; then
-          # Read the error message from the file
-          error_message=$(cat error.log)
-          echo "Error from Step 2: $error_message"
-        else
-          echo "No error message found."
-        fi
+      - name: Debug Step
+        run: |
+          if [ -f error.log ]; then
+            # Read the error message from the file
+            error_message=$(cat error.log)
+            echo "Error from Step 2: $error_message"
+          else
+            echo "No error message found."
+          fi
 
       - name: Run Kani with older version
         uses: ./ # Uses the action in the root directory
