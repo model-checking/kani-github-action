@@ -15,14 +15,11 @@ jobs:
 
       - name: Run Kani with invalid version
         id: set_error
-        run: |
-          output=$(./src/install-kani.sh "0.47.0")
+        uses: ./
+        with:
+          working-directory: tests/cargo-kani/simple-lib
+          kani-version: '0.47.0'
         continue-on-error: true  # Continue to the next steps even if this job fails
-
-      - name: Check for Expected Error with invalid version
-        id: check_error
-        run: |
-          echo $output
 
       - name: Run Kani with older version
         uses: ./ # Uses the action in the root directory
