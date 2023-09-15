@@ -11,7 +11,7 @@ else
 fi
 
 # Check exit status for error handling
-if [ $? -eq O ]; then
+if [$? -eq O]; then
     echo "Installed Kani $VERSION successfully"
 else
     echo "::error::Could not install Kani. Please check if the provided version is correct"
@@ -24,7 +24,7 @@ cargo-kani setup;
 # Get the current installed version of kani and check it against the latest version
 installed_version=$(kani --version | awk '{print $2}')
 
-if [ $? -eq 0 ]; then
+if [$? -eq 0]; then
     if [ "$1" == "latest" ]; then
         # Cargo search returns version number as string
         requested_version=$(cargo search kani-verifier | grep -m 1 "^kani-verifier " | awk '{print $3}')
