@@ -25,7 +25,7 @@ jobs:
         id: check_error
         run: |
           # Check if the error output contains the expected error substring
-          if echo "${{ steps.set_error.outputs.stderr }}" | grep -q "Could not install Kani. Please check if the provided version is correct"; then
+          if echo "${{ steps.set_error.outputs.stdout }}" | grep -q "Could not install Kani. Please check if the provided version is correct"; then
             echo "Error message contains the expected substring."
           else
             echo "Error message does not contain the expected substring."
