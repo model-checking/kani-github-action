@@ -6,31 +6,31 @@ This repository provides a GitHub Action for running the [Kani Rust Verifier](ht
 
 The following parameters can be used to configure and customize the behavior of this GitHub Action:
 
-### `kani-version` (optional)
+`kani-version` (optional)
 
 - **Description**: Specifies the Kani version number to use.
 - **Default**: 'latest'
 - **Usage**: You can provide a specific version of Kani to use. If omitted, the latest version will be installed and used.
 
-### `command` (optional)
+`command` (optional)
 
 - **Description**: Specifies the command to run Kani.
 - **Default**: 'cargo-kani'
 - **Usage**: You can set a custom command to run Kani. For example, this allows you to use a different binary or script for Kani, if needed.
 
-### `working-directory` (optional)
+`working-directory` (optional)
 
 - **Description**: Specifies the directory in which Kani should be run.
 - **Default**: '.'
 - **Usage**: Kani will be executed within this directory.
 
-### `args` (optional)
+`args` (optional)
 
 - **Description**: Specifies additional arguments to pass to Kani.
 - **Default**: ''
 - **Usage**: You can provide any additional command-line arguments to Kani using this parameter. These arguments will be appended to the Kani command.
 
-### `enable-propproof` (optional)
+`enable-propproof` (optional)
 
 - **Description**: Experimental feature that allows Kani to verify proptest harnesses using the PropProof feature.
 - **Default**: false
@@ -57,7 +57,7 @@ jobs:
           working-directory: './path/to/project'
           args: '--tests'
           enable-propproof: true
-
+```
 
 ## Security
 
