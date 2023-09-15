@@ -17,12 +17,14 @@ jobs:
         id: set_error
         run: |
           output=$(./src/install-kani.sh "0.47.0")
-          echo $output
+          echo "ERROR_MESSAGE=${output}" >> "$GITHUB_OUTPUT"
         continue-on-error: true  # Continue to the next steps even if this job fails
 
       - name: Debug previous step
         id: debug_step
-        run: echo "The selected color is $MY_VARIABLE"
+        env:
+          ERROR_MESSAGE: ${{ steps.random-color-generator.outputs.ERROR_MESSAGE }}
+        run: echo "The selected color is $ERROR_MESSAGE"
 
       - name: Run Kani with older version
         uses: ./ # Uses the action in the root directory
