@@ -15,7 +15,7 @@ jobs:
 
       - name: Run Kani with invalid version
         id: set_error
-        runs: |
+        run: |
           output=$(./src/install-kani.sh "0.47.0")
           echo "MY_VARIABLE=$output" >> $GITHUB_ENV
         continue-on-error: true  # Continue to the next steps even if this job fails
