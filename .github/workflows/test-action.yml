@@ -15,20 +15,21 @@ jobs:
 
       - name: Run Kani with invalid version
         id: set_error
-        run: |
-          output=$(./src/install-kani.sh "0.47.0")
-          echo "The output is: $output"
-        continue-on-error: true  # Continue to the next steps even if this job fails
+        uses: ./
+        with:
+          working-directory: tests/cargo-kani/simple-lib
+          kani-version: '0.1.10'
 
-      - name: Debug Step
-        run: |
-          if [ -f error.log ]; then
-            # Read the error message from the file
-            error_message=$(cat error.log)
-            echo "Error from Step 2: $error_message"
-          else
-            echo "No error message found."
-          fi
+    - name: Check previous step outcome
+      id: get_error
+      run: |
+        # Check the outcome of Step 2
+        if [[ "${{ steps.set_error.outcome }}" == "failure" ]]; then
+          echo "Step 2 failed."
+          # You can take additional actions based on the failure.
+        else
+          echo "Step 2 succeeded or was skipped."
+        fi
 
       - name: Run Kani with older version
         uses: ./ # Uses the action in the root directory
