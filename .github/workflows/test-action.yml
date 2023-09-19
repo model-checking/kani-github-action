@@ -19,6 +19,7 @@ jobs:
         with:
           working-directory: tests/cargo-kani/simple-lib
           kani-version: '0.1.10'
+        continue-on-error: true
 
       - name: Check previous step outcome
         id: get_error
