@@ -20,16 +20,16 @@ jobs:
           working-directory: tests/cargo-kani/simple-lib
           kani-version: '0.1.10'
 
-    - name: Check previous step outcome
-      id: get_error
-      run: |
-        # Check the outcome of Step 2
-        if [[ "${{ steps.set_error.outcome }}" == "failure" ]]; then
-          echo "Step 2 failed."
-          # You can take additional actions based on the failure.
-        else
-          echo "Step 2 succeeded or was skipped."
-        fi
+      - name: Check previous step outcome
+        id: get_error
+        run: |
+          # Check the outcome of Step 2
+          if [[ "${{ steps.set_error.outcome }}" == "failure" ]]; then
+            echo "Step 2 failed."
+            # You can take additional actions based on the failure.
+          else
+            echo "Step 2 succeeded or was skipped."
+          fi
 
       - name: Run Kani with older version
         uses: ./ # Uses the action in the root directory
