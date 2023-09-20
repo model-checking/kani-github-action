@@ -24,12 +24,12 @@ jobs:
       - name: Check previous step outcome
         id: get_error
         run: |
-          # Check the outcome of Step 2
+          # Check the outcome of "Run Kani with invalid version"
           if [[ "${{ steps.set_error.outcome }}" == "failure" ]]; then
-            echo "Step 2 failed."
-            # You can take additional actions based on the failure.
+            echo "Running Kani with invalid version "0.1.10" failed."
           else
-            echo "Step 2 succeeded or was skipped."
+            echo "::error::Running Kani with invalid version succeeded incorrectly or was skipped."
+            exit 1
           fi
 
       - name: Run Kani with older version
@@ -37,10 +37,36 @@ jobs:
         with:
           working-directory: tests/cargo-kani/simple-lib
           kani-version: '0.33.0'
-      - name: Run Kani
+
+      - name: Test run Kani with older version
+        run: |
+          installed_version = $(kani --version)
+          expected_version = '0.33.0'
+
+          if [[ "$installed_version" == "$expected_version" ]]; then
+            echo "The installed version matches the expected version."
+          else
+            echo "::error::The installed version ($installed_version) does not match the expected version ($expected_version)."
+            exit 1
+          fi
+
+      - name: Run Kani with latest version
         uses: ./ # Uses the action in the root directory
         with:
           working-directory: tests/cargo-kani/simple-lib
+
+      - name: Test run Kani with latest version
+        run: |
+          installed_version = $(kani --version)
+          expected_version = $(cargo search kani-verifier | grep -m 1 "^kani-verifier " | awk '{print $3}')
+
+          if [[ "$installed_version" == "$expected_version" ]]; then
+            echo "The installed version matches the latest version."
+          else
+            echo "::error::The installed version ($installed_version) does not match the latest version ($expected_version)."
+            exit 1
+          fi
+
       - name: Test ProfProof within Kani Action
         uses: ./
         with:
