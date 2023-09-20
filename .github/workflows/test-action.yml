@@ -60,7 +60,7 @@ jobs:
           installed_version=$(kani --version | awk '{print $2}')
           expected_version=$(cargo search kani-verifier | grep -m 1 "^kani-verifier " | awk '{print $3}' | sed 's/"//g')
 
-          echo "version online is $(cargo search kani-verifier)."
+          echo "version online is $(cargo search kani-verifier | grep -m 1 "kani")."
 
           if [[ "$installed_version" == "$expected_version" ]]; then
             echo "The installed version ($installed_version) matches the latest version ($expected_version)"
