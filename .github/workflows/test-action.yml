@@ -40,7 +40,7 @@ jobs:
 
       - name: Test run Kani with older version
         run: |
-          installed_version=$(kani --version)
+          installed_version=$(kani --version | awk '{print $2})
           expected_version='0.33.0'
 
           if [[ "$installed_version" == "$expected_version" ]]; then
@@ -57,7 +57,7 @@ jobs:
 
       - name: Test run Kani with latest version
         run: |
-          installed_version=$(kani --version)
+          installed_version=$(kani --version | awk '{print $2})
           expected_version=$(cargo search kani-verifier | grep -m 1 "^kani-verifier " | awk '{print $3}')
 
           if [[ "$installed_version" == "$expected_version" ]]; then
