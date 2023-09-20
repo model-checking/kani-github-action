@@ -12,7 +12,9 @@ NOTE: All the fields provided are optional and have default behaviors when not s
 
 - **Description**: Specifies the Kani version number to use.
 - **Default**: 'latest'
-- **Usage**: You can provide a specific version of Kani to use. If omitted, the latest version will be installed and used.
+- **Example-pinned-version**: `'0.33.0'`
+- **Usage**: You can provide a specific version of Kani to use. [Cargo's version specific format is expected for specific versions](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html).
+If omitted, the latest version of `Kani` hosted on [`Kani's crates.io page`](https://crates.io/crates/kani-verifier) will be installed and used.
 
 `command`
 
