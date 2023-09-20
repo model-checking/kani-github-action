@@ -44,7 +44,7 @@ jobs:
           expected_version='0.33.0'
 
           if [[ "$installed_version" == "$expected_version" ]]; then
-            echo "The installed version matches the expected version."
+            echo "The installed version ($installed_version) matches the expected version ($expected_version)."
           else
             echo "::error::The installed version ($installed_version) does not match the expected version ($expected_version)."
             exit 1
@@ -61,7 +61,7 @@ jobs:
           expected_version=$(cargo search kani-verifier | grep -m 1 "^kani-verifier " | awk '{print $3}')
 
           if [[ "$installed_version" == "$expected_version" ]]; then
-            echo "The installed version matches the latest version."
+            echo "The installed version ($installed_version) matches the latest version. ($expected_version)"
           else
             echo "::error::The installed version ($installed_version) does not match the latest version ($expected_version)."
             exit 1
