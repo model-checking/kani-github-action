@@ -10,44 +10,40 @@ The following parameters can be used to configure and customize the behavior of 
 
 `kani-version`
 
-- **Description**: Specifies the Kani version number to use.
-- **Default**: 'latest'
-- **Usage**: You can provide a specific version of Kani to use. [Cargo's version specific format is expected for specific versions](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html).
+- **Description**: The Kani version to use.
+- **Default**: `latest`
+- **Usage**: `latest` or `x.y.z` to mention which version Kani to use. [Cargo's version specific format is expected for specific versions](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html).
 If omitted, the latest version of `Kani` hosted on [`Kani's crates.io page`](https://crates.io/crates/kani-verifier) will be installed and used.
 
 `command`
 
-- **Description**: Specifies the command to run Kani.
-- **Default**: 'cargo-kani'
-- **Usage**: You can set a custom command to run Kani. For example, this allows you to use a different binary or script for Kani, if needed.
+- **Description**: The command to run Kani.
+- **Default**: `cargo-kani`
+- **Usage**: `cargo-kani` or `kani` or custom path to a `kani` binary. Subcommands need to be passed to the `args` field.
 
 `working-directory`
 
-- **Description**: Specifies the directory in which Kani should be run.
-- **Default**: '.'
-- **Usage**: Kani will be executed within this directory.
+- **Description**: The directory in which Kani should be run.
+- **Default**: `'.'`
+- **Usage**: `/path/to/project` or `.`
 
 `args`
 
-- **Description**: Specifies additional arguments to pass to Kani.
-- **Default**: ''
-- **Usage**: You can provide any additional command-line arguments to Kani using this parameter. These arguments will be appended to the Kani command.
+- **Description**: Additional arguments to pass to Kani.
+- **Default**: `''`
+- **Usage**: These arguments or subcommands will be appended to the Kani command.
 
 `enable-propproof`
 
 - **Description**: Experimental feature that allows Kani to verify proptest harnesses using the PropProof feature.
-- **Default**: false
+- **Default**: `false`
 - **Usage**: If set to `true`, Kani will enable the experimental PropProof feature for verifying proptest harnesses.
-
-## Kani-version default behavior
-
-Please note that since providing `kani-version` is optional, if the user doesn't provide the version, the action will install the latest version of `Kani` on `crates.io`.
 
 ## Example usage in a workflow YAML file:
 
 Here are a few examples of workflow YAML files for the Kani Github Action
 
-#### Default config which uses the latest version of kani on project
+#### Example 1: Default config which uses the latest version of kani to run `cargo-kani` on project in current directory
 ```yaml
 jobs:
   kani:
@@ -55,12 +51,9 @@ jobs:
     steps:
       - name: Run Kani
         uses: model-checking/kani-github-action@v1.0
-        with:
-          command: 'cargo-kani'
-          working-directory: './path/to/project'
 ```
 
-#### Use a specific version of kani, version `0.35.0` on project
+#### Example 2: Use a specific version of kani, version `0.35.0`, to run `cargo-kani`  on a project
 ```yaml
 jobs:
   kani:
@@ -74,7 +67,7 @@ jobs:
           working-directory: './path/to/project'
 ```
 
-#### Use pinned version of kani, version `0.35.0` on project with `--tests`
+#### Example 3: Use pinned version of kani, version `0.35.0`, to run `cargo-kani --tests` on a project with propproof harnesses.
 ```yaml
 jobs:
   kani:
