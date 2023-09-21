@@ -2,17 +2,16 @@
 
 This repository provides a GitHub Action for running the [Kani Rust Verifier](https://github.com/model-checking/kani) in CI.
 
-## GitHub Action Parameters
+## Kani GitHub Action Parameters
 
 The following parameters can be used to configure and customize the behavior of this GitHub Action:
 
-NOTE: All the fields provided are optional and have default behaviors when not specified.
+**NOTE**: All the fields provided are optional and have default behaviors when not specified.
 
 `kani-version`
 
 - **Description**: Specifies the Kani version number to use.
 - **Default**: 'latest'
-- **Example-pinned-version**: `'0.33.0'`
 - **Usage**: You can provide a specific version of Kani to use. [Cargo's version specific format is expected for specific versions](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html).
 If omitted, the latest version of `Kani` hosted on [`Kani's crates.io page`](https://crates.io/crates/kani-verifier) will be installed and used.
 
@@ -46,15 +45,43 @@ Please note that since providing `kani-version` is optional, if the user doesn't
 
 ## Example usage in a workflow YAML file:
 
-Here is an example of a workflow YAML file for the Kani Github Action
+Here are a few examples of workflow YAML files for the Kani Github Action
 
+#### Default config which uses the latest version of kani on project
 ```yaml
 jobs:
   kani:
     runs-on: ubuntu-latest
     steps:
       - name: Run Kani
-        uses: model-checking/kani-github-action@v0.37
+        uses: model-checking/kani-github-action@v1.0
+        with:
+          command: 'cargo-kani'
+          working-directory: './path/to/project'
+```
+
+#### Use a specific version of kani, version `0.35.0` on project
+```yaml
+jobs:
+  kani:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Kani
+        uses: model-checking/kani-github-action@v1.0
+        with:
+          kani-version: '0.35.0'
+          command: 'cargo-kani'
+          working-directory: './path/to/project'
+```
+
+#### Use pinned version of kani, version `0.35.0` on project with `--tests`
+```yaml
+jobs:
+  kani:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Kani
+        uses: model-checking/kani-github-action@v1.0
         with:
           kani-version: '0.35.0'
           command: 'cargo-kani'
