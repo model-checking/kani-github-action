@@ -40,10 +40,6 @@ runs:
     - name: Install Kani
       run: ${{ github.action_path }}/src/install-kani.sh ${{ inputs.kani-version }}
       shell: bash
-      run: |
-        export KANI_VERSION="0.37.0";
-        cargo install --version $KANI_VERSION --locked kani-verifier;
-        cargo-kani setup;
 
     - name: Install PropProof
       if: ${{ inputs.enable-propproof == 'true' }}
