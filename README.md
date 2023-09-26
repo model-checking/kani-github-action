@@ -35,7 +35,7 @@ If omitted, the latest version of `Kani` hosted on [`Kani's crates.io page`](htt
 
 `enable-propproof`
 
-- **Description**: Experimental feature that allows Kani to verify proptest harnesses using the PropProof feature.
+- **Description**: Experimental feature that allows Kani to verify [proptest harnesses](https://proptest-rs.github.io/proptest/proptest/index.html) using the PropProof feature.
 - **Default**: `false`
 - **Usage**: If set to `true`, Kani will enable the experimental PropProof feature for verifying proptest harnesses.
 
