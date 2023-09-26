@@ -41,9 +41,12 @@ If omitted, the latest version of `Kani` hosted on [`Kani's crates.io page`](htt
 
 ## Example usage in a workflow YAML file:
 
-Here are a few examples of workflow YAML files for the Kani Github Action
+Here are a few examples of workflow YAML files for the Kani Github Action:
 
-#### Example 1: Default config which uses the latest version of kani to run `cargo-kani` on project in current directory
+#### Example 1: Default configuration
+
+Default config which uses the latest version of Kani to run `cargo-kani` on project in current directory.
+
 ```yaml
 jobs:
   kani:
@@ -53,7 +56,10 @@ jobs:
         uses: model-checking/kani-github-action@v1.0
 ```
 
-#### Example 2: Use a specific version of kani, version `0.35.0`, to run `cargo-kani`  on a project
+#### Example 2: Use pinned version of Kani
+
+Use a specific version of Kani, version `0.35.0`, to run `cargo-kani`  on a project.
+
 ```yaml
 jobs:
   kani:
@@ -67,7 +73,10 @@ jobs:
           working-directory: './path/to/project'
 ```
 
-#### Example 3: Use pinned version of kani, version `0.35.0`, to run `cargo-kani --tests` on a project with propproof harnesses.
+#### Example 3: Run Kani with args
+
+Use latest version of Kani, to run `cargo-kani --tests` on a project with `propproof` harnesses.
+
 ```yaml
 jobs:
   kani:
@@ -76,9 +85,6 @@ jobs:
       - name: Run Kani
         uses: model-checking/kani-github-action@v1.0
         with:
-          kani-version: '0.35.0'
-          command: 'cargo-kani'
-          working-directory: './path/to/project'
           args: '--tests'
           enable-propproof: true
 ```
