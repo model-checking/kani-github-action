@@ -40,7 +40,8 @@ runs:
         cargo install --version $KANI_VERSION --locked kani-verifier;
         cargo-kani setup;
 
-    - name: Send deprecated warning
+    - name: Send warning about move to v1
+      shell: bash
       run: |
         echo "::warning::We will be moving to v1, which will install the latest version of Kani by default. Please be aware that version 0.38 will be the final release where the version of Kani matches the version of Kani Github Action."
 
