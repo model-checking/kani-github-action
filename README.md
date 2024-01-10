@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Kani
-        uses: model-checking/kani-github-action@v1.0
+        uses: model-checking/kani-github-action@v1
 ```
 
 #### Example 2: Use pinned version of Kani
@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Kani
-        uses: model-checking/kani-github-action@v1.0
+        uses: model-checking/kani-github-action@v1
         with:
           kani-version: '0.35.0'
           command: 'cargo-kani'
@@ -83,7 +83,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Kani
-        uses: model-checking/kani-github-action@v1.0
+        uses: model-checking/kani-github-action@v1
         with:
           args: '--tests'
           enable-propproof: true
