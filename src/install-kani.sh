@@ -4,10 +4,10 @@
 
 # If version is latest, install directly from cargo
 if [ "$1" == "latest" ]; then
-    cargo install --locked kani-verifier;
+    cargo +stable install --locked kani-verifier;
 else
     VERSION=$1
-    cargo install --version $VERSION --locked kani-verifier;
+    cargo +stable install --version $VERSION --locked kani-verifier;
 fi
 
 # Check exit status for error handling
