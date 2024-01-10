@@ -37,7 +37,7 @@ runs:
       shell: bash
       run: |
         export KANI_VERSION="0.38.0";
-        cargo install --version $KANI_VERSION --locked kani-verifier;
+        cargo +stable install --version $KANI_VERSION --locked kani-verifier;
         cargo-kani setup;
 
     - name: Send warning about move to v1
