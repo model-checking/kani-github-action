@@ -2,10 +2,11 @@
 
 This repository provides a GitHub Action for running the [Kani Rust Verifier](https://github.com/model-checking/kani) in CI.
 
-⚠️ **Important Notice**: We will be moving to [`v1`](https://github.com/model-checking/kani-github-action/releases/tag/v1.0), which will install the latest version of Kani by default.
+⚠️ **Important Notice**: We have recently released the action [Kani Rust Verifier `v1`](https://github.com/marketplace/actions/kani-rust-verifier),
+which will install the latest version of Kani by default.
 Please be aware that version `0.38` will be the final release where the version of Kani matches the version of Kani Github Action.
 Make sure to update your workflows and references accordingly.
-To install a specific version of Kani, please add a semver version to the field `kani-version` as shown in the example below.
+To select a specific version of Kani Rust Verifier, please add a semver version to the field `kani-version` as shown in the example below.
 
 Example:
 
