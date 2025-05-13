@@ -24,15 +24,15 @@ cargo-kani setup;
 # Get the current installed version of kani and check it against the latest version
 installed_version=$(kani --version | awk '{print $2}')
 
-if [$? -eq 0]; then
+if [ $? -eq 0 ]; then
     if [ "$1" == "latest" ]; then
         # Cargo search returns version number as string
-        requested_version=$(cargo search kani-verifier | grep -m 1 "^kani-verifier " | awk '{print $3}')
+        requested_version=$(cargo search kani-verifier | grep -m 1 "kani-verifier" | awk '{print $3}' | tr -d '"')
     else
         requested_version=$1
     fi
 
-    if ["$installed_version" != "$requested_version"]; then
+    if [ "$installed_version" != "$requested_version" ]; then
         echo "::error::The version of Kani installed was different than the one requested"
         exit 1
     fi
