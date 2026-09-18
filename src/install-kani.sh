@@ -22,7 +22,15 @@ fi
 cargo-kani setup;
 
 # Get the current installed version of kani and check it against the latest version
-installed_version=$(kani --version | awk '{print $2}')
+installed_version=$(
+    kani --version |
+        sed -nE '1s/^Kani Rust Verifier ([^[:space:]]+).*/\1/p'
+)
+
+if [ -z "$installed_version" ]; then
+    echo "::error::Could not determine installed Kani version"
+    exit 1
+fi
 
 if [ $? -eq 0 ]; then
     if [ "$1" == "latest" ]; then
