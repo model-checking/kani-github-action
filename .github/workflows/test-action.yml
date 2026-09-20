@@ -66,10 +66,3 @@ jobs:
             echo "::error::The installed version ($installed_version) does not match the latest version ($expected_version)."
             exit 1
           fi
-
-      - name: Test ProfProof within Kani Action
-        uses: ./
-        with:
-          working-directory: tests/cargo-kani/proptest-lib
-          args: --tests
-          enable-propproof: true

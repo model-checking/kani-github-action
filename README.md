@@ -33,12 +33,6 @@ If omitted, the latest version of `Kani` hosted on [`Kani's crates.io page`](htt
 - **Default**: `''`
 - **Usage**: These arguments or subcommands will be appended to the Kani command.
 
-`enable-propproof`
-
-- **Description**: Experimental feature that allows Kani to verify [proptest harnesses](https://proptest-rs.github.io/proptest/proptest/index.html) using the PropProof feature.
-- **Default**: `false`
-- **Usage**: If set to `true`, Kani will enable the experimental PropProof feature for verifying proptest harnesses.
-
 ## Example usage in a workflow YAML file:
 
 Here are a few examples of workflow YAML files for the Kani Github Action:
@@ -75,7 +69,7 @@ jobs:
 
 #### Example 3: Run Kani with args
 
-Use latest version of Kani, to run `cargo-kani --tests` on a project with `propproof` harnesses.
+Use latest version of Kani, to run `cargo-kani --tests` on a project.
 
 ```yaml
 jobs:
@@ -86,7 +80,6 @@ jobs:
         uses: model-checking/kani-github-action@v1
         with:
           args: '--tests'
-          enable-propproof: true
 ```
 
 ## Security
