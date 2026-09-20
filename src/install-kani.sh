@@ -39,8 +39,14 @@ if [ -z "$installed_version" ]; then
 fi
 
 if [ "$1" == "latest" ]; then
-    # Cargo search returns version number as string
-    requested_version=$(cargo search kani-verifier | grep -m 1 "^kani-verifier " | awk '{print $3}' | tr -d '"')
+    # Cargo search returns version number as string. Force color off: the Rust
+    # toolchain action exports CARGO_TERM_COLOR=always, and the escape codes it
+    # adds would otherwise defeat the anchor below.
+    requested_version=$(CARGO_TERM_COLOR=never cargo search kani-verifier | grep -m 1 "^kani-verifier " | awk '{print $3}' | tr -d '"')
+    if [ -z "$requested_version" ]; then
+        echo "::error::Could not determine the latest Kani version from \`cargo search\`"
+        exit 1
+    fi
 else
     requested_version=$1
 fi

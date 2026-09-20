@@ -68,7 +68,9 @@ jobs:
               sed -nE 's/^(Kani Rust Verifier|kani) ([^[:space:]]+).*/\2/p' |
               head -1
           )
-          expected_version=$(cargo search kani-verifier | grep -m 1 "^kani-verifier " | awk '{print $3}' | sed 's/"//g')
+          # CARGO_TERM_COLOR=always leaks in from the Rust toolchain action, and
+          # its escape codes would defeat the anchor below.
+          expected_version=$(CARGO_TERM_COLOR=never cargo search kani-verifier | grep -m 1 "^kani-verifier " | awk '{print $3}' | sed 's/"//g')
 
           if [[ "$installed_version" == "$expected_version" ]]; then
             echo "The installed version ($installed_version) matches the latest version ($expected_version)"
