@@ -26,10 +26,6 @@ inputs:
     description: 'Arguments to pass to kani.'
     required: false
     default: ''
-  enable-propproof:
-    description: 'Experimental: Allow Kani to verify proptest harnesses using the PropProof feature'
-    required: false
-    default: false
 
 runs:
   using: "composite"
@@ -40,21 +36,6 @@ runs:
     - name: Install Kani
       run: ${{ github.action_path }}/src/install-kani.sh ${{ inputs.kani-version }}
       shell: bash
-
-    - name: Install PropProof
-      if: ${{ inputs.enable-propproof == 'true' }}
-      uses: actions/checkout@v3
-      with:
-        repository: model-checking/kani
-        ref: features/proptest
-        path: propproof
-        submodules: true
-
-    - name: Add PropProof to config
-      if: ${{ inputs.enable-propproof == 'true' }}
-      shell: bash
-      run: |
-        echo "paths = [\"$GITHUB_WORKSPACE/propproof\"]" > $HOME/.cargo/config.toml
 
     - name: Run Kani
       shell: bash
