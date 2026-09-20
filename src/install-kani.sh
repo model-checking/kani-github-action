@@ -12,7 +12,7 @@ fi
 
 # Check exit status for error handling
 if [ $? -eq 0 ]; then
-    echo "Installed Kani $VERSION successfully"
+    echo "Installed Kani $1 successfully"
 else
     echo "::error::Could not install Kani. Please check if the provided version is correct"
     exit 1
@@ -21,27 +21,31 @@ fi
 # Setup kani in ci
 cargo-kani setup;
 
-# Get the current installed version of kani and check it against the latest version
+# Get the current installed version of kani and check it against the latest version.
+# Two output formats have to be supported, since this action can install any
+# published version:
+#   - Kani 0.68.0 and later print `Kani Rust Verifier <version> (<invocation>)`,
+#     followed by a `CBMC <version>` line.
+#   - Kani 0.67.0 and earlier used clap's default flag, printing `kani <version>`.
 installed_version=$(
     kani --version |
-        sed -nE '1s/^Kani Rust Verifier ([^[:space:]]+).*/\1/p'
+        sed -nE 's/^(Kani Rust Verifier|kani) ([^[:space:]]+).*/\2/p' |
+        head -1
 )
 
 if [ -z "$installed_version" ]; then
-    echo "::error::Could not determine installed Kani version"
+    echo "::error::Could not determine installed Kani version from \`kani --version\`"
     exit 1
 fi
 
-if [ $? -eq 0 ]; then
-    if [ "$1" == "latest" ]; then
-        # Cargo search returns version number as string
-        requested_version=$(cargo search kani-verifier | grep -m 1 "kani-verifier" | awk '{print $3}' | tr -d '"')
-    else
-        requested_version=$1
-    fi
+if [ "$1" == "latest" ]; then
+    # Cargo search returns version number as string
+    requested_version=$(cargo search kani-verifier | grep -m 1 "^kani-verifier " | awk '{print $3}' | tr -d '"')
+else
+    requested_version=$1
+fi
 
-    if [ "$installed_version" != "$requested_version" ]; then
-        echo "::error::The version of Kani installed was different than the one requested"
-        exit 1
-    fi
+if [ "$installed_version" != "$requested_version" ]; then
+    echo "::error::The version of Kani installed ($installed_version) was different than the one requested ($requested_version)"
+    exit 1
 fi
